@@ -1,0 +1,16 @@
+#@PROJECT_NAME@-config.cmake
+#
+# Modifies CMAKE_MODULE_PATH to add @PROJECT_NAME@_MODULES
+#
+# Output variables set:
+#  * @PROJECT_NAME@_MODULES - Path to CMake Modules directory
+#  * @PROJECT_NAME@_TOOLCHAINS - Path to CMake Toolchains directory
+
+@PACKAGE_INIT@
+
+set_and_check(@PROJECT_NAME@_MODULES "@PACKAGE_MODULES_EXPORT_DIR@")
+set_and_check(@PROJECT_NAME@_TOOLCHAINS "@PACKAGE_TOOLCHAINS_EXPORT_DIR@")
+
+set(CMAKE_MODULE_PATH ${@PROJECT_NAME@_MODULES} ${CMAKE_MODULE_PATH})
+
+check_required_components("@PROJECT_NAME@")
