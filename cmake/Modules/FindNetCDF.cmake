@@ -1,3 +1,8 @@
+# (C) Copyright 2017-2020 UCAR
+#
+# This software is licensed under the terms of the Apache Licence Version 2.0
+# which can be obtained at http://www.apache.org/licenses/LICENSE-2.0.
+#
 # (C) Copyright 2011- ECMWF.
 #
 # This software is licensed under the terms of the Apache Licence Version 2.0
@@ -5,7 +10,7 @@
 # In applying this licence, ECMWF does not waive the privileges and immunities
 # granted to it by virtue of its status as an intergovernmental organisation nor
 # does it submit to any jurisdiction.
-
+#
 # Try to find NetCDF includes and library.
 # Supports static and shared libaries and allows each component to be found in sepearte prefixes.
 #
@@ -87,7 +92,7 @@ foreach( _comp ${${CMAKE_FIND_PACKAGE_NAME}_FIND_COMPONENTS} )
   set( _arg_${_COMP} ${_comp} )
   list( APPEND _search_components ${_name_${_COMP}} )
   if( NOT _name_${_COMP} )
-    ecbuild_error( "Find${CMAKE_FIND_PACKAGE_NAME}: COMPONENT ${_comp} is not a valid component. Valid components: ${_possible_components}" )
+    message(SEND_ERROR "Find${CMAKE_FIND_PACKAGE_NAME}: COMPONENT ${_comp} is not a valid component. Valid components: ${_possible_components}" )
   endif()
 endforeach()
 list( REMOVE_DUPLICATES _search_components )
@@ -125,7 +130,7 @@ foreach( _comp IN LISTS _search_components )
     PATH_SUFFIXES include include/netcdf
   )
   mark_as_advanced(NetCDF_${_comp}_INCLUDE_FILE)
-  ecbuild_debug("NetCDF_${_comp}_INCLUDE_FILE: ${NetCDF_${_comp}_INCLUDE_FILE}")
+  message(DEBUG "NetCDF_${_comp}_INCLUDE_FILE: ${NetCDF_${_comp}_INCLUDE_FILE}")
   if( NetCDF_${_comp}_INCLUDE_FILE )
     get_filename_component(NetCDF_${_comp}_INCLUDE_FILE ${NetCDF_${_comp}_INCLUDE_FILE} ABSOLUTE)
     get_filename_component(NetCDF_${_comp}_INCLUDE_DIR ${NetCDF_${_comp}_INCLUDE_FILE} DIRECTORY)
@@ -151,7 +156,7 @@ foreach( _comp IN LISTS _search_components )
       HINTS ${NetCDF_INCLUDE_DIRS} ${_include_search_hints} ${_search_hints}
       PATH_SUFFIXES bin Bin ../bin ../../bin
       DOC "NetCDF n${_conf}-config helper" )
-    ecbuild_debug("NetCDF_${_comp}_CONFIG_EXECUTABLE: ${NetCDF_${_comp}_CONFIG_EXECUTABLE}")
+    message(DEBUG "NetCDF_${_comp}_CONFIG_EXECUTABLE: ${NetCDF_${_comp}_CONFIG_EXECUTABLE}")
 endforeach()
 
 set(_C_libs_flag --libs)
@@ -184,7 +189,7 @@ foreach( _comp IN LISTS _search_components )
   mark_as_advanced( NetCDF_${_comp}_LIBRARY )
   get_filename_component(NetCDF_${_comp}_LIBRARY ${NetCDF_${_comp}_LIBRARY} ABSOLUTE)
   set(NetCDF_${_comp}_LIBRARY ${NetCDF_${_comp}_LIBRARY} CACHE STRING "NetCDF ${_comp} library" FORCE)
-  ecbuild_debug("NetCDF_${_comp}_LIBRARY: ${NetCDF_${_comp}_LIBRARY}")
+  message(DEBUG "NetCDF_${_comp}_LIBRARY: ${NetCDF_${_comp}_LIBRARY}")
 
 
   if( NetCDF_${_comp}_LIBRARY )
