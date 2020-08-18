@@ -24,7 +24,7 @@ configure_package_config_file(PackageConfig.cmake.in ${PROJECT_NAME}-config.cmak
                               PATH_VARS MODULES_EXPORT_DIR TOOLCHAINS_EXPORT_DIR)
 
 #Install-tree export
-set(CONFIG_INSTALL_DESTINATION lib/${PROJECT_NAME}/cmake)
+set(CONFIG_INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/${PROJECT_NAME}/cmake)
 set(MODULES_EXPORT_DIR ${JEDI_MODULES_INSTALL_DIR}/Modules)
 set(TOOLCHAINS_EXPORT_DIR ${JEDI_MODULES_INSTALL_DIR}/Toolchains)
 configure_package_config_file(PackageConfig.cmake.in install/${PROJECT_NAME}-config.cmake
