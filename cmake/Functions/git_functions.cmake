@@ -20,7 +20,6 @@ function( find_branch_name )
 		ERROR_QUIET
     OUTPUT_STRIP_TRAILING_WHITESPACE )
   set( GIT_TAG_FUNC ${GIT_TAGS} PARENT_SCOPE )
-
 endfunction( find_branch_name)
 
 #############################################
