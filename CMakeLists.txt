@@ -9,6 +9,7 @@ project( jedicmake VERSION 1.0.0 DESCRIPTION "JEDI CMake Toolkit" )
 
 include(GNUInstallDirs)
 set(JEDI_MODULES_INSTALL_DIR ${CMAKE_INSTALL_DATADIR}/${PROJECT_NAME})
+install(DIRECTORY cmake/Functions DESTINATION ${JEDI_MODULES_INSTALL_DIR})
 install(DIRECTORY cmake/Modules DESTINATION ${JEDI_MODULES_INSTALL_DIR})
 install(DIRECTORY cmake/Toolchains DESTINATION ${JEDI_MODULES_INSTALL_DIR})
 
@@ -26,6 +27,7 @@ configure_package_config_file(PackageConfig.cmake.in ${PROJECT_NAME}-config.cmak
 
 #Install-tree export
 set(CONFIG_INSTALL_DESTINATION ${CMAKE_INSTALL_LIBDIR}/${PROJECT_NAME}/cmake)
+set(FUNCTIONS_EXPORT_DIR ${JEDI_MODULES_INSTALL_DIR}/Functions)
 set(MODULES_EXPORT_DIR ${JEDI_MODULES_INSTALL_DIR}/Modules)
 set(TOOLCHAINS_EXPORT_DIR ${JEDI_MODULES_INSTALL_DIR}/Toolchains)
 configure_package_config_file(PackageConfig.cmake.in install/${PROJECT_NAME}-config.cmake
