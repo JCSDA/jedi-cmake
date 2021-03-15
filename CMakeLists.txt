@@ -15,6 +15,7 @@ install(DIRECTORY cmake/Toolchains DESTINATION ${JEDI_MODULES_INSTALL_DIR})
 include(CMakePackageConfigHelpers)
 
 #Build-tree export
+set(FUNCTIONS_EXPORT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Functions)
 set(MODULES_EXPORT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules)
 set(TOOLCHAINS_EXPORT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Toolchains)
 set(BUILD_INSTALL_DESTINATION lib/${PROJECT_NAME}/cmake)
