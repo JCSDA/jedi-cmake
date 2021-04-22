@@ -153,8 +153,8 @@ foreach( _comp IN LISTS _search_components )
   endif()
   find_program( NetCDF_${_comp}_CONFIG_EXECUTABLE
       NAMES n${_conf}-config
-    HINTS ${NetCDF_INCLUDE_DIRS} ${_include_search_hints} ${_search_hints}
-    PATH_SUFFIXES bin Bin ../bin ../../bin
+      HINTS ${NetCDF_INCLUDE_DIRS} ${_include_search_hints} ${_search_hints}
+      PATH_SUFFIXES bin Bin ../bin ../../bin
       DOC "NetCDF n${_conf}-config helper" )
     message(DEBUG "NetCDF_${_comp}_CONFIG_EXECUTABLE: ${NetCDF_${_comp}_CONFIG_EXECUTABLE}")
 endforeach()
@@ -212,7 +212,7 @@ foreach( _comp IN LISTS _search_components )
       set( _library_type STATIC)
     else()
       if( NOT ${NetCDF_${_comp}_LIBRARY} IN_LIST NetCDF_LIBRARIES )
-      list( APPEND NetCDF_LIBRARIES ${NetCDF_${_comp}_LIBRARY} )
+        list( APPEND NetCDF_LIBRARIES ${NetCDF_${_comp}_LIBRARY} )
         message(DEBUG "Adding new netcdf library [${_comp}]: ${NetCDF_${_comp}_LIBRARY}")
       endif()
       set( NetCDF_${_comp}_LIBRARY_SHARED TRUE )
