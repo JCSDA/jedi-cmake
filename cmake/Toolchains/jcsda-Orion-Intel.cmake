@@ -15,4 +15,4 @@ set( ENABLE_AEC OFF CACHE STRING "Disable AEC" FORCE )
 # FYPP preprocessor (line numbering warning)
 ####################################################################
 
-set( FYPP_NO_LINE_NUMBERING TRUE )
+set( FYPP_NO_LINE_NUMBERING ON CACHE STRING "Disable FYPP line numbering" FORCE )
