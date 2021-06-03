@@ -11,3 +11,9 @@ set( CMAKE_SHARED_LINKER_FLAGS   "-gxx-name=/glade/u/apps/ch/opt/gnu/9.1.0/bin/g
 ####################################################################
 
 set( ENABLE_AEC OFF CACHE STRING "Disable AEC" FORCE )
+
+####################################################################
+# FYPP preprocessor (line numbering warning)
+####################################################################
+
+set( FYPP_NO_LINE_NUMBERING TRUE )
