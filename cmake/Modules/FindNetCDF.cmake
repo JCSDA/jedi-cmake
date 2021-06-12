@@ -176,6 +176,21 @@ function(netcdf_config exec flag output_var)
   endif()
 endfunction()
 
+## Detect additional package properties
+netcdf_config(${NetCDF_C_CONFIG_EXECUTABLE} --has-parallel4 _val)
+if( NOT _val MATCHES "^(yes|no)$" )
+  netcdf_config(${NetCDF_C_CONFIG_EXECUTABLE} --has-parallel _val)
+endif()
+if( _val MATCHES "^(yes)$" )
+  set(NetCDF_PARALLEL TRUE CACHE STRING "NetCDF has parallel IO capability via pnetcdf or hdf5." FORCE)
+else()
+  set(NetCDF_PARALLEL FALSE CACHE STRING "NetCDF has no parallel IO capability." FORCE)
+endif()
+
+if(NetCDF_PARALLEL)
+  find_package(MPI REQUIRED)
+endif()
+
 ## Find libraries for each component
 set( NetCDF_LIBRARIES )
 foreach( _comp IN LISTS _search_components )
@@ -190,7 +205,6 @@ foreach( _comp IN LISTS _search_components )
   get_filename_component(NetCDF_${_comp}_LIBRARY ${NetCDF_${_comp}_LIBRARY} ABSOLUTE)
   set(NetCDF_${_comp}_LIBRARY ${NetCDF_${_comp}_LIBRARY} CACHE STRING "NetCDF ${_comp} library" FORCE)
   message(DEBUG "NetCDF_${_comp}_LIBRARY: ${NetCDF_${_comp}_LIBRARY}")
-
 
   if( NetCDF_${_comp}_LIBRARY )
     if( NetCDF_${_comp}_LIBRARY MATCHES ".a$" )
@@ -237,9 +251,18 @@ foreach( _comp IN LISTS _search_components )
         IMPORTED_LOCATION ${NetCDF_${_comp}_LIBRARY}
         INTERFACE_INCLUDE_DIRECTORIES "${NetCDF_${_comp}_INCLUDE_DIRS}"
         INTERFACE_LINK_LIBRARIES ${NetCDF_${_comp}_LIBRARIES} )
+      if( NOT _comp MATCHES "^(C)$" )
+        target_link_libraries(NetCDF::NetCDF_${_comp} INTERFACE NetCDF::NetCDF_C)
+      endif()
+      if(MPI_${_comp}_FOUND)
+        target_link_libraries(NetCDF::NetCDF_${_comp} INTERFACE MPI::MPI_${_comp})
+      endif()
     endif()
   endif()
 endforeach()
+if(NetCDF_LIBRARIES AND NetCDF_${_comp}_LIBRARY_SHARED)
+    list(REMOVE_DUPLICATES NetCDF_LIBRARIES)
+endif()
 set(NetCDF_LIBRARIES "${NetCDF_LIBRARIES}" CACHE STRING "NetCDF library targets" FORCE)
 
 ## Find version via netcdf-config if possible
@@ -268,17 +291,6 @@ if (NetCDF_INCLUDE_DIRS)
     endforeach()
   endif()
 endif ()
-
-## Detect additional package properties
-netcdf_config(${NetCDF_C_CONFIG_EXECUTABLE} --has-parallel4 _val)
-if( NOT _val MATCHES "^(yes|no)$" )
-  netcdf_config(${NetCDF_C_CONFIG_EXECUTABLE} --has-parallel _val)
-endif()
-if( _val MATCHES "^(yes)$" )
-  set(NetCDF_PARALLEL TRUE CACHE STRING "NetCDF has parallel IO capability via pnetcdf or hdf5." FORCE)
-else()
-  set(NetCDF_PARALLEL FALSE CACHE STRING "NetCDF has no parallel IO capability." FORCE)
-endif()
 
 ## Finalize find_package
 include(FindPackageHandleStandardArgs)

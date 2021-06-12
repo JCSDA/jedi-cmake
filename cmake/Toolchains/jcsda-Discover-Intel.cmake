@@ -18,3 +18,9 @@ set( MPIEXEC_NUMPROC_FLAG "-np" CACHE STRING "NUMPROC flag for mpirun" FORCE)
 ####################################################################
 
 set( ENABLE_AEC OFF CACHE STRING "Disable AEC" FORCE)
+
+####################################################################
+# FYPP preprocessor (line numbering warning)
+####################################################################
+
+set( FYPP_NO_LINE_NUMBERING ON CACHE STRING "Disable FYPP line numbering" FORCE )
