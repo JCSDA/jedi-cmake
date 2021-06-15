@@ -7,7 +7,7 @@ function( find_branch_name )
 
   execute_process(
     COMMAND bash "-c" "git symbolic-ref -q --short HEAD"
-    WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/${_p_REPO_DIR_NAME}"
+    WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}/${_p_REPO_DIR_NAME}"
     OUTPUT_VARIABLE GIT_BRANCH
 		ERROR_QUIET
     OUTPUT_STRIP_TRAILING_WHITESPACE )
@@ -15,7 +15,7 @@ function( find_branch_name )
 
 	execute_process(
     COMMAND bash "-c" "git describe --tags --exact-match"
-    WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/${_p_REPO_DIR_NAME}"
+    WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}/${_p_REPO_DIR_NAME}"
     OUTPUT_VARIABLE GIT_TAGS
 		ERROR_QUIET
     OUTPUT_STRIP_TRAILING_WHITESPACE )
