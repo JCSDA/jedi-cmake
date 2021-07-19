@@ -138,6 +138,7 @@ if(PnetCDF_Fortran_FOUND AND NOT TARGET PnetCDF::PnetCDF_Fortran)
         set_property(TARGET PnetCDF::PnetCDF_Fortran APPEND PROPERTY INTERFACE_INCLUDE_DIRECTORIES ${PnetCDF_MODULE_DIR})
     endif()
     set(_new_components 1)
+    target_link_libraries(PnetCDF::PnetCDF_Fortran INTERFACE -lpnetcdf)
 endif()
 
 # PnetCDF::PnetCDF_C imported interface target
@@ -146,6 +147,7 @@ if(PnetCDF_C_FOUND AND NOT TARGET PnetCDF::PnetCDF_C)
     set_target_properties(PnetCDF::PnetCDF_C PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${PnetCDF_INCLUDE_DIR}
                                                         INTERFACE_LINK_DIRECTORIES ${PnetCDF_LIB_DIR})
     set(_new_components 1)
+    target_link_libraries(PnetCDF::PnetCDF_C INTERFACE -lpnetcdf)
 endif()
 
 # PnetCDF::PnetCDF_CXX imported interface target
@@ -154,6 +156,7 @@ if(PnetCDF_CXX_FOUND AND NOT TARGET PnetCDF::PnetCDF_CXX)
     set_target_properties(PnetCDF::PnetCDF_CXX PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${PnetCDF_INCLUDE_DIR}
                                                           INTERFACE_LINK_DIRECTORIES ${PnetCDF_LIB_DIR})
     set(_new_components 1)
+    target_link_libraries(PnetCDF::PnetCDF_CXX INTERFACE -lpnetcdf)
 endif()
 
 ## Print status
