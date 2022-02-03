@@ -42,8 +42,9 @@ find_package_handle_standard_args (udunits DEFAULT_MSG udunits_SHARED_LIB udunit
 
 mark_as_advanced (udunits_SHARED_LIB udunits_INCLUDE_DIR)
 
-add_library(udunits_lib UNKNOWN IMPORTED)
-set_property(TARGET udunits_lib PROPERTY IMPORTED_LOCATION ${udunits_SHARED_LIB})
-target_include_directories(udunits_lib INTERFACE ${udunits_INCLUDE_DIR})
+if(udunits_FOUND AND NOT TARGET udunits::udunits)
+	add_library(udunits::udunits INTERFACE IMPORTED)
+	target_include_directories(udunits::udunits INTERFACE_INCLUDE_DIRECTORIES ${udunits_INCLUDE_DIR})
+	target_link_libraries(udunits::udunits INTERFACE_LINK_LIBRARIES ${udunits_SHARED_LIB})
+endif()
 
-add_library(udunits::udunits ALIAS udunits_lib)
