@@ -44,7 +44,7 @@ mark_as_advanced (udunits_SHARED_LIB udunits_INCLUDE_DIR)
 
 if(udunits_FOUND AND NOT TARGET udunits::udunits)
 	add_library(udunits::udunits INTERFACE IMPORTED)
-	target_include_directories(udunits::udunits INTERFACE_INCLUDE_DIRECTORIES ${udunits_INCLUDE_DIR})
-	target_link_libraries(udunits::udunits INTERFACE_LINK_LIBRARIES ${udunits_SHARED_LIB})
+	set_target_properties(udunits::udunits PROPERTIES INTERFACE_INCLUDE_DIRECTORIES ${udunits_INCLUDE_DIR})
+	set_target_properties(udunits::udunits PROPERTIES INTERFACE_LINK_LIBRARIES ${udunits_SHARED_LIB})
 endif()
 
