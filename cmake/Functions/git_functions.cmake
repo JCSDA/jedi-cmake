@@ -56,7 +56,7 @@ function( set_git_source )
     set( REMOTE_NAME "origin" )
   endif()
   execute_process(
-    COMMAND bash "-c" "git remote show ${REMOTE_NAME} | grep 'Fetch URL'"
+    COMMAND bash "-c" "git ls-remote --get-url ${REMOTE_NAME}"
     WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
     RESULT_VARIABLE REMOTE_URL_RESULT
     OUTPUT_VARIABLE REMOTE_URL_STRING
