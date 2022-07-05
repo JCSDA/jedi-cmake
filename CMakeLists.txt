@@ -5,7 +5,7 @@
 #
 
 cmake_minimum_required( VERSION 3.12 )
-project( jedicmake VERSION 1.2.0 DESCRIPTION "JEDI CMake Toolkit" )
+project( jedicmake VERSION 1.3.0 DESCRIPTION "JEDI CMake Toolkit" )
 
 include(GNUInstallDirs)
 set(JEDI_MODULES_INSTALL_DIR ${CMAKE_INSTALL_DATADIR}/${PROJECT_NAME})
