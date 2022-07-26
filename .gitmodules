@@ -1,4 +1,6 @@
 [submodule "CMakeModules"]
-	path = CMakeModules
-	url = https://github.com/NOAA-EMC/CMakeModules
-	branch = develop
+  path = CMakeModules
+  #url = https://github.com/NOAA-EMC/CMakeModules
+  #branch = develop
+  url = https://github.com/climbfuji/CMakeModules
+  branch = feature/add_find_gptl_pnetcdf_udunits
