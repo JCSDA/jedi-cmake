@@ -17,7 +17,7 @@ include(CMakePackageConfigHelpers)
 
 #Build-tree export
 set(FUNCTIONS_EXPORT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Functions)
-set(MODULES_EXPORT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules)
+set(MODULES_EXPORT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules/Modules)
 set(TOOLCHAINS_EXPORT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/cmake/Toolchains)
 set(BUILD_INSTALL_DESTINATION lib/${PROJECT_NAME}/cmake)
 configure_package_config_file(PackageConfig.cmake.in ${PROJECT_NAME}-config.cmake
